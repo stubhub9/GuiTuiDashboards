@@ -1,0 +1,74 @@
+﻿<Window x:Class="HandheldButtonGui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HandheldButtonGui"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="450">
+    <!--  Concept:  A handheld controller with simulated Touchscreen Buttons [ using: Normal Mouse Buttons]; but could be a Display with Keyboard, 10 key or a Dedicated Button controller  
+    [ Just wiring Button Commands through a model to a UI with clickable buttons.] 
+    
+        Design Choice:  Buttons represent a touch screen; So buttons can change or disappear.
+    
+        Combine Color and Textures to contrast options.
+        
+    Top Header:  Company Banner, Version,  Connected Icons
+    Top Row:    Display grid, Text OUTPUT
+    
+    Bottom Row: 2 column
+            Power       On/ Off,        Password,   Load,           Save                   
+    
+            Options:        Display,    Settings,   Rename,         Help 
+    
+            Display:        BG,         FG,         Brightness,    FontSize 
+    
+            Operations:     F1      F2      F3      F4
+    
+            
+    
+            4 button  aswd, arrows
+                                    UP > BACKTRACK
+                        
+                       SCROLL LEFT                 SCROLL RIGHT
+    
+                                    DOWN >  SELECT  
+    
+    
+    
+            2 BUTTON        YES >  COMMIT      NO >  BACK
+    
+    
+    
+    
+    
+    -->
+
+    <Grid x:Name="MainGrid1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="150*"/>
+            <RowDefinition Height="250*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="430*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle x:Name="rectTopBanner" 
+                  Fill="{Binding BannerColor, Converter={StaticResource ColorToBrushConverter1}}" 
+                   HorizontalAlignment="Center" Height="34" Stroke="Black"
+                   VerticalAlignment="Center" Width="430" 
+                   Grid.Column="1" Grid.ColumnSpan="1"
+                   />
+
+
+
+
+
+
+
+
+    </Grid>
+</Window>

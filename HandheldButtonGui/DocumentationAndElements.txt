@@ -1,0 +1,82 @@
+﻿TODO:
+	KEEP LEARNING SQL SERVER
+	RELEARN WPF better,
+	Do text files respond to inlines or attributes ?guessing NO?
+
+	ADD:  Display Screen
+			Whichever TextBox block is best for In-Lines.
+			Develop InLine  text content builder.
+			OPTIONS:  pick USER FontSize from Range, 
+					?select	complimentary enough FontColor?
+					Happy with 40_60_Auto_Black_White font (ask system?)
+
+			OPTIONS:  Button Colors 
+	?OR Stick to Just MainGridBgRect?  
+	?New Next Projects?  OR  STYLES and SKINS for this project
+
+	ADD: User Controls:
+			LEFT		RIGHT		SELECT		BACK
+
+	SCROLLING BUTTONS 
+	or TABBING THRU BUTTONS 
+	2 or 4 BUTTONS
+	
+	USE DISPLAY FOR TOOL TIPS;  
+	ADD DASHBOARD ICONS  flash the icons, connected, 
+	Mini Game:  Fill rate, Set points, Reserve Qty??
+
+	Animate Icons, Images and Text Chars.
+	Rotate, Color_And_Texture_Warnings
+
+
+
+	rectTopBanner  Make Bindings work 
+				Add rgbAlpha color
+
+				Banner Animations:  
+					Flash white for SELECT
+					
+					?Motion too? 
+						?pinch? and flash for SELECT
+						?old frame shrinking and returning to parent? on BACK
+
+MainGrid1		Add an App Background color. mainGridBgRect
+					only changes at USER OPTIONS :  BG  :  COLOR
+														:  BRIGHTNESS
+
+Verify Z layout
+
+
+TODID:
+STARTED:  
+
+
+STARTED:  Property binding for Banner Brush
+
+
+
+TODONE:
+
+
+
+
+TODOnT:
+
+
+
+
+Storyboards:
+
+Colors:
+Selectable BG, FG and BannerColors
+	FG		Black or White	FONT	
+			?True/False  Automatic @ <40 or >60 White Background
+
+			SELECT FONT SIZE
+
+	BG		Pick color by swiping left or right and ACCEPT
+			Adjust BG BRIGHTNESS   "                      "
+			
+
+
+
