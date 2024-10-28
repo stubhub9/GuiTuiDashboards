@@ -21,6 +21,7 @@ namespace HandheldButtonGui
     {
 
         #region  Fields and Properties
+
         private Brush _bannerBrush1 = Brushes.Cyan;
         public Brush BannerBrush1
         {

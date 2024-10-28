@@ -1,7 +1,12 @@
 ﻿TODO:
 	KEEP LEARNING SQL SERVER
 	RELEARN WPF better,
+
+	Checking out binding...
+
 	Do text files respond to inlines or attributes ?guessing NO?
+	RichTextBox ...
+
 
 	ADD:  Display Screen
 			Whichever TextBox block is best for In-Lines.
@@ -14,12 +19,19 @@
 	?OR Stick to Just MainGridBgRect?  
 	?New Next Projects?  OR  STYLES and SKINS for this project
 
-	ADD: User Controls:
-			LEFT		RIGHT		SELECT		BACK
+	ADD: User Controls:  mouse, arrow, wasd:
+	ADD:  OPTIONS:  User hotkey remap	
+	USE COMMANDS for multiple triggers of same function
+	
+	LEFT		RIGHT		SELECT		BACK
 
 	SCROLLING BUTTONS 
 	or TABBING THRU BUTTONS 
 	2 or 4 BUTTONS
+
+	6 key:  Arrows, SELECT,		BACK
+			aswd,	ENTER		space  backspace
+   [10 key] 4826,	ENTER 3		., space 1  0
 	
 	USE DISPLAY FOR TOOL TIPS;  
 	ADD DASHBOARD ICONS  flash the icons, connected, 
@@ -31,7 +43,7 @@
 
 
 	rectTopBanner  Make Bindings work 
-				Add rgbAlpha color
+				Add aRGB, HueValue color
 
 				Banner Animations:  
 					Flash white for SELECT

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HandheldButtonGui"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="450">
-    <!--  Concept:  A handheld controller with simulated Touchscreen Buttons [ using: Normal Mouse Buttons]; but could be a Display with Keyboard, 10 key or a Dedicated Button controller  
+	<!--  Concept:  A handheld controller with simulated Touchscreen Buttons [ using: Normal Mouse Buttons]; but could be a Display with Keyboard, 10 key or a Dedicated Button controller  
     [ Just wiring Button Commands through a model to a UI with clickable buttons.] 
     
         Design Choice:  Buttons represent a touch screen; So buttons can change or disappear.
@@ -44,24 +44,200 @@
     
     -->
 
-    <Grid x:Name="MainGrid1">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="35*"/>
-            <RowDefinition Height="150*"/>
-            <RowDefinition Height="250*"/>
-            <RowDefinition Height="15*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="430*"/>
-            <ColumnDefinition Width="10*"/>
-        </Grid.ColumnDefinitions>
-        <Rectangle x:Name="rectTopBanner" 
+	<Grid x:Name="MainGrid1"
+        ShowGridLines="True">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="35*"/>
+			<RowDefinition Height="200*"/>
+			<RowDefinition Height="200*"/>
+			<RowDefinition Height="15*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="43*"/>
+			<ColumnDefinition Width="43*"/>
+			<ColumnDefinition Width="2*"/>
+
+		</Grid.ColumnDefinitions>
+		<!--
+                <Rectangle x:Name="rectTopBanner" 
                   Fill="{Binding BannerColor, Converter={StaticResource ColorToBrushConverter1}}" 
                    HorizontalAlignment="Center" Height="34" Stroke="Black"
                    VerticalAlignment="Center" Width="430" 
                    Grid.Column="1" Grid.ColumnSpan="1"
                    />
+            -->
+
+		<Rectangle x:Name="rectTopBanner" 
+                  Fill="{Binding _bannerBrush1}" Stroke="Black"
+                  Height="34" Width="430" 
+                   Grid.Column="1" Grid.ColumnSpan="2"
+                   />
+
+		<Rectangle x:Name="BackgroundRect"
+        Grid.Column="1"
+        HorizontalAlignment="Center" VerticalAlignment="Top"
+         Fill="DarkBlue" Stroke="Black"  
+         Height="193" Width="215" Margin="0,32,0,0" Grid.RowSpan="2" />
+
+
+
+		<Rectangle x:Name="Conductor_L1"
+        Grid.Column="1"  Grid.Row="1"
+        HorizontalAlignment="Left" VerticalAlignment="Top"
+         Margin="5,20,0,0" 
+         Fill="Black" Stroke="Black"  
+         Height="150" Width="5" />
+
+		<!--		<Rectangle x:Name="Conductor_L2"
+        Grid.Column="1"  Grid.Row="1"
+        HorizontalAlignment="Left" VerticalAlignment="Top"
+         Margin="200,20,0,0" 
+         Fill="Black" Stroke="Black"  
+         Height="150" Width="5" />
+         -->
+
+
+
+		<Path 
+        x:Name="Conductor_Neutral"
+        Grid.Column="1"  Grid.Row="1"
+        Fill="Ivory" Stroke="Black" 
+        StrokeThickness="1">
+			<Path.Data>
+				<RectangleGeometry Rect="200,20,5,150" />
+			</Path.Data>
+		</Path>
+
+
+		<Rectangle x:Name="ConductorTap_1A"
+        Grid.Column="1"  Grid.Row="1"
+        HorizontalAlignment="Left" VerticalAlignment="Top"
+         Margin="10,60,0,0" 
+         Fill="Black" Stroke="Black"  
+         Height="5" Width="25" />
+
+		<Rectangle x:Name="ConductorTap_1A1"
+        Grid.Column="1"  Grid.Row="1"
+        HorizontalAlignment="Left" VerticalAlignment="Top"
+         Margin="70,60,0,0" 
+         Fill="Black" Stroke="Black"  
+         Height="5" Width="68" />
+
+		<Rectangle x:Name="Neutral_1A1"
+        Grid.Column="1"  Grid.Row="1"
+        HorizontalAlignment="Left" VerticalAlignment="Top"
+         Margin="178,60,0,0" 
+         Fill="Ivory" Stroke="Black"  
+         Height="5" Width="22" />
+
+
+
+		<Path 
+        x:Name="ConductorTap_1B1"
+        Grid.Column="1"  Grid.Row="1"
+        Fill="Black" Stroke="Black" 
+        StrokeThickness="1">
+			<Path.Data>
+				<RectangleGeometry Rect="90,65,5,50" />
+			</Path.Data>
+		</Path>
+
+
+		<Path 
+        x:Name="ConductorTap_2B"
+        Grid.Column="1"  Grid.Row="1"
+        Fill="Black" Stroke="Green" 
+        StrokeThickness="1">
+			<Path.Data>
+				<RectangleGeometry Rect="95,110,43,5" />
+			</Path.Data>
+		</Path>
+
+
+
+		<Path 
+        x:Name="Neutral_1A2"
+        Grid.Column="1"  Grid.Row="1"
+        Fill="Ivory" Stroke="Black" 
+        StrokeThickness="1">
+			<Path.Data>
+				<RectangleGeometry Rect="178,110,22,5" />
+			</Path.Data>
+		</Path>
+
+
+
+
+
+
+
+		<Ellipse x:Name="Termination_1A1"
+        Grid.Column="1" Grid.Row="1"
+        HorizontalAlignment="Left" VerticalAlignment="Top"
+        Height="9" Width="9"
+        Margin="34,58,0,0"  
+        Fill="Ivory" Stroke="Black"  />
+
+
+
+		<Path 
+        x:Name="Termination_1A2"
+        Grid.Column="1"  Grid.Row="1"
+        Fill="LemonChiffon" Stroke="Black" 
+        StrokeThickness="1">
+			<Path.Data>
+				<EllipseGeometry 
+                Center="66,62" RadiusX="4.0" RadiusY="4.0" />
+			</Path.Data>
+		</Path>
+
+
+		<Path 
+        x:Name="Switch"
+        Grid.Column="1"  Grid.Row="1"
+        Fill="Red" Stroke="Black" 
+        StrokeThickness="1">
+			<Path.Data>
+				<!-- Create a composite shape. -->
+				<GeometryGroup>
+					<RectangleGeometry Rect="35,42,35,5" />
+					<RectangleGeometry Rect="50,32,5,10" />
+				</GeometryGroup>
+			</Path.Data>
+		</Path>
+
+
+		<Path 
+        x:Name="Motor"
+        Grid.Column="1"  Grid.Row="1"
+        Fill="Green" Stroke="Black" 
+        StrokeThickness="1">
+			<Path.Data>
+				<!-- Create a composite shape. -->
+				<GeometryGroup>
+					<EllipseGeometry Center="158,60" RadiusX="20" RadiusY="20" />
+					<EllipseGeometry Center="158,60" RadiusX="20" RadiusY="6" />
+					<EllipseGeometry Center="158,60" RadiusX="6" RadiusY="20" />
+				</GeometryGroup>
+			</Path.Data>
+		</Path>
+
+
+		<Path 
+        x:Name="Light"
+        Grid.Column="1"  Grid.Row="1"
+        Fill="DarkGoldenrod" Stroke="Black" 
+        StrokeThickness="1">
+			<Path.Data>
+				<!-- Create a composite shape. -->
+				<GeometryGroup>
+					<EllipseGeometry Center="158,112" RadiusX="20" RadiusY="20" />
+					<EllipseGeometry Center="158,112" RadiusX="18" RadiusY="18" />
+					<EllipseGeometry Center="158,112" RadiusX="16" RadiusY="16" />
+				</GeometryGroup>
+			</Path.Data>
+		</Path>
 
 
 
@@ -70,5 +246,78 @@
 
 
 
-    </Grid>
+
+
+
+
+
+		<Image
+            Grid.Column="2" Grid.Row="1"
+            Stretch="None" 
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Margin="50,20,0,0">
+			<Image.Source>
+				<DrawingImage >
+					<!--
+		<DrawingImage PresentationOptions:Freeze="True">
+		-->
+					<DrawingImage.Drawing>
+
+						<GeometryDrawing>
+							<GeometryDrawing.Geometry>
+
+								<!-- Create a composite shape. -->
+								<GeometryGroup>
+									<RectangleGeometry Rect="0,20,50,5" />
+									<RectangleGeometry Rect="23,0,5,10" />
+								</GeometryGroup>
+							</GeometryDrawing.Geometry>
+							<GeometryDrawing.Brush>
+
+								<!-- Paint the drawing with a gradient. -->
+								<LinearGradientBrush>
+									<GradientStop Offset="0.0" Color="#0000FF" />
+									<GradientStop Offset="0.25" Color="#0000FF" />
+									<GradientStop Offset="0.35" Color="#006666" />
+									<GradientStop Offset="0.65" Color="#006666" />
+									<GradientStop Offset="0.75" Color="#0000FF" />
+									<GradientStop Offset="1.0" Color="#0000FF" />
+								</LinearGradientBrush>
+							</GeometryDrawing.Brush>
+							<GeometryDrawing.Pen>
+
+								<!-- Outline the drawing with a solid color. -->
+								<Pen Thickness="10" Brush="DarkBlue" />
+							</GeometryDrawing.Pen>
+						</GeometryDrawing>
+					</DrawingImage.Drawing>
+				</DrawingImage>
+			</Image.Source>
+		</Image>
+
+
+
+		<Button x:Name="fingerButton"
+        Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Left" 
+        Margin="42,5,0,0"
+        Padding="0"
+        VerticalAlignment="Top" Width="21" Height="25">
+			<TextBlock TextWrapping="Wrap"
+            Margin="0" Padding="0"
+            FontSize="18"
+            Text="&#x261F;"/>
+
+		</Button>
+
+
+
+
+
+
+
+
+
+
+
+	</Grid>
 </Window>
