@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -21,6 +22,7 @@ namespace HandheldButtonGui
     {
 
         #region  Fields and Properties
+        private bool _isSpinning = false;
 
         //  Project Flag
         private bool _IsEnergized = false;
@@ -38,7 +40,7 @@ namespace HandheldButtonGui
             set
             {
                 _bannerBrush1 = value;
-                INotifyPropertyChanged ( () => BannerBrush1 );
+                //INotifyPropertyChanged ( () => BannerBrush1 );
             }
         }
 
@@ -64,6 +66,54 @@ namespace HandheldButtonGui
 
         #region  Bindings and Events
 
+
+        private void btnSpinner_MouseEnter ( object sender, MouseEventArgs e)
+        {
+            if ( !_isSpinning )
+            {
+                _isSpinning = true;
+                //  Make a double animation obj,
+                //  register with Completed
+                var dblAnim = new DoubleAnimation ();
+                dblAnim.Completed += ( o, s ) => { _isSpinning = false; };
+
+                //  Set the start value and end value.
+                dblAnim.From = 0;
+                dblAnim.To = 360;
+                dblAnim.Duration = new Duration ( TimeSpan.FromSeconds ( 4 ) );
+                dblAnim.RepeatBehavior = RepeatBehavior.Forever;
+
+
+                //  Create a RotateTransform obj, set to button transform
+                var rt = new RotateTransform ();
+                fingerButton.RenderTransform = rt;
+
+
+                //  Animate the object.
+                rt.BeginAnimation ( RotateTransform.AngleProperty, dblAnim );
+
+            }
+        }
+
+
+
+        private void fingerButton_OnClick ( object sender, RoutedEventArgs e )
+        {
+            var dblAnim = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.0,
+                //DEFAULT:  1 Second Interval
+                AutoReverse = true,
+                RepeatBehavior = new RepeatBehavior (TimeSpan.FromSeconds (10)),
+            };
+            fingerButton.BeginAnimation ( Button.OpacityProperty, dblAnim );
+
+        }
+
+
+
+
         //public class ColorToBrushConverter1 : IValueConverter
         //{
         //    public object Convert ( object value, Type targetType, object parameter, CultureInfo culture )
@@ -78,10 +128,10 @@ namespace HandheldButtonGui
         //    }
         //}
 
-        private void INotifyPropertyChanged ( Func<Brush> value )
-        {
-            throw new NotImplementedException ();
-        }
+        //private void INotifyPropertyChanged ( Func<Brush> value )
+        //{
+        //    throw new NotImplementedException ();
+        //}
 
 
 
@@ -139,7 +189,76 @@ namespace HandheldButtonGui
 
         private void CloseSwitch ()
         {
-            throw new NotImplementedException ();
+            NameScope.SetNameScope ( this, new NameScope () );
+
+            ThicknessAnimation closeSwitchAnimation = new ThicknessAnimation ()
+            {
+                Duration = TimeSpan.FromSeconds ( 1.5 ),
+                FillBehavior = FillBehavior.HoldEnd
+            };
+
+
+
+
+
+
+            //var dblAnimClose = new DoubleAnimation ()
+            //{
+            //    From = 10.0,
+            //    To = 18.0,
+            //    Duration = new Duration(TimeSpan.FromSeconds(1.5)),
+            //    //  Leave autoreverse and repeatbehavior as default false
+            //};
+
+
+
+            //dpstButton.
+            ////var switch = dpstButton;
+            ////  <Button x:Name="dpstButton"
+            //Storyboard storyboardCloseSwitch = new Storyboard ();
+            //storyboardCloseSwitch.Children.Add ( dblAnimClose );
+            //Storyboard.SetTargetName (dblAnimClose, dpstButton.Name);
+            ////Storyboard.SetTargetProperty ( dblAnimClose, new PropertyPath ( Button.MarginProperty ) );
+
+
+            //            < Storyboard >
+            //     < ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty = "Margin" BeginTime = "00:00:00" >
+            //        < SplineThicknessKeyFrame KeyTime = "00:00:00" Value = "134, 70,0,0" />
+            //        < SplineThicknessKeyFrame KeyTime = "00:00:03" Value = "50, 70,0,0" />
+            //     </ ThicknessAnimationUsingKeyFrames >
+            //</ Storyboard >
+
+
+            /*
+Actually, ya you can do what you want to do, exactly as you want to do using RenderTransform mixed with some DoubleAnimation and even add some extra flair to it, for example;
+
+< Grid x:Name = "TheObject" Opacity = "0" >
+    < Grid.RenderTransform >
+        < TranslateTransform x:Name = "MoveMeBaby" X = "50" />
+    </ Grid.RenderTransform >
+    < Grid.Triggers >
+        < EventTrigger RoutedEvent = "Grid.Loaded" >
+            < BeginStoryboard >
+                < Storyboard >
+                    < DoubleAnimationUsingKeyFrames Storyboard.TargetName = "MoveMeBaby"
+                                                   Storyboard.TargetProperty = "X" >
+                        < SplineDoubleKeyFrame KeyTime = "0:0:1.25" Value = "0" />
+                    </ DoubleAnimationUsingKeyFrames >
+                    < DoubleAnimationUsingKeyFrames Storyboard.TargetName = "TheObject"
+                                                   Storyboard.TargetProperty = "Opacity" >
+                        < SplineDoubleKeyFrame KeyTime = "0:0:1.55" Value = "1" />
+                    </ DoubleAnimationUsingKeyFrames >
+                </ Storyboard >
+            </ BeginStoryboard >
+        </ EventTrigger >
+    </ Grid.Triggers >
+</ Grid >
+
+            */
+
+
+
+
         }
 
 
