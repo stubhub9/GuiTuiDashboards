@@ -12,6 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace HandheldButtonGui
 {
@@ -67,6 +68,61 @@ namespace HandheldButtonGui
         #region  Bindings and Events
 
 
+        private void animateCanvas ( object sender, RoutedEventArgs e)
+        {
+
+            //motorPath
+            var dblAnim = new DoubleAnimation ()
+            {
+
+            };
+
+
+
+        }
+
+        private void btnMotorSpinner ( object sender, MouseEventArgs e )
+        {
+            var dblAnim = new DoubleAnimation ()
+            {
+                //AccelerationRatio=0.1,
+                //DecelerationRatio=0.2,
+                //Duration=0:0:5,
+                From = 0,
+                To = 360,
+                Duration = new Duration ( TimeSpan.FromSeconds ( 1 ) ),
+                RepeatBehavior = RepeatBehavior.Forever,
+            };
+
+            var rotTransform = new RotateTransform ();
+            motorPath.RenderTransform = rotTransform;
+            //  Animate the object.
+            rotTransform.BeginAnimation ( RotateTransform.AngleProperty, dblAnim );
+
+
+
+
+
+
+
+            var timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds ( 3 )
+            };
+            timer.Start ();
+            timer.Tick += ( sender, args ) =>
+            {
+                timer.Stop ();
+
+                //dblAnim.
+            };
+
+        }
+
+
+
+
+
         private void btnSpinner_MouseEnter ( object sender, MouseEventArgs e)
         {
             if ( !_isSpinning )
@@ -111,7 +167,33 @@ namespace HandheldButtonGui
 
         }
 
+        private void YesNoCancelButton_Click ( object sender, RoutedEventArgs e )
+        {
 
+            //if ((e.Source as FrameworkElement) == null )
+            //{ return; }
+
+            //  To clear null warnings.
+            FrameworkElement sourceFrameworkElement = (e.Source as FrameworkElement) ?? new FrameworkElement ();
+
+            //FrameworkElement sourceFrameworkElement = e.Source as FrameworkElement;
+
+
+            //  As long as a Nameless Element does nothing; without an error.
+            switch (sourceFrameworkElement.Name)
+            {
+                case "YesButton":
+                    // YesButton logic.
+                    break;
+                case "NoButton":
+                    // NoButton logic.
+                    break;
+                case "CancelButton":
+                    // CancelButton logic.
+                    break;
+            }
+            e.Handled = true;
+        }
 
 
         //public class ColorToBrushConverter1 : IValueConverter

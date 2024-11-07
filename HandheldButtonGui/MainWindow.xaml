@@ -67,68 +67,109 @@
                    Grid.Column="1" Grid.ColumnSpan="1"
                    />
             -->
-
-
 		<Rectangle x:Name="rectTopBanner" 
-                  Fill="{Binding _bannerBrush1}" Stroke="Black"
-                  Height="34" Width="430" 
-                   Grid.Column="1" Grid.ColumnSpan="2"
-                   />
+		Grid.Column="1" 
+      Fill="{Binding _bannerBrush1}" Stroke="Black"
+      Height="34" Width="430" 
+       />
 
-		<Rectangle x:Name="BackgroundRect"
+
+
+		<Canvas
+		Background="DarkGray"
         Grid.Column="1" Grid.Row="1"
+		>
+			<Canvas.Triggers>
+
+				<EventTrigger RoutedEvent="Canvas.Loaded">
+					<EventTrigger.Actions>
+						<BeginStoryboard>
+							<Storyboard>
+								<DoubleAnimation
+								Storyboard.TargetName="motorPath"
+								Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)"
+								Duration="0:0:10">
+								</DoubleAnimation>
+							</Storyboard>
+						</BeginStoryboard>
+					</EventTrigger.Actions>
+				</EventTrigger>
+			</Canvas.Triggers>
+			<!--  Rectangle worked as a Grid Cell background;
+				But Stretch does not seem to work on Canvas
+
+			<Rectangle x:Name="BackgroundRect"
         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
          Fill="DarkGray" Stroke="Black" />
 
+		 -->
 
-
-
-         <!--
+			<!--
          Animate Y from 10 to 18
          -->
-		<Button x:Name="dpstButton"
-        Grid.Column="1"  Grid.Row="1" 
+			<!--Margin="33,10,0,0"-->
+			<Button x:Name="spstButton"
         HorizontalAlignment="Left" VerticalAlignment="Top"  
-        Margin="33,10,0,0" Padding="0"
+		Canvas.Left="33" Canvas.Top="10" 
+		Padding="0"
         Width="40" Height="40" 
         Click="fingerButton_Click">
+				<Button.Triggers>
+					<EventTrigger RoutedEvent="Button.Loaded">
+					<!--<EventTrigger RoutedEvent="MouseEnter">-->
 
-			<StackPanel
+						<EventTrigger.Actions>
+							<BeginStoryboard>
+								<!--    Storyboards:    MAP the Animation Object to the Target Property;
+                                                are ALWAYS wrapped by BeginStoryBoard parents. -->
+								<!--	HAVE TO WRAP Attached Properties in Parenthesis -->
+								<Storyboard TargetProperty ="(Canvas.Top)">
+									<!--    Animation Elements are placed inside StoryBoard -->
+									<DoubleAnimation From="10" To="18"
+                                Duration="0:0:1"
+                                 RepeatBehavior="Forever"/>
+								</Storyboard>
+							</BeginStoryboard>
+						</EventTrigger.Actions>
+
+					</EventTrigger>
+				</Button.Triggers>
+
+				<StackPanel
             Background="DarkGray"
             Margin="0" >
-				<TextBlock TextWrapping="Wrap" 
+					<TextBlock TextWrapping="Wrap" 
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Margin="10,0,0,0" Padding="0"
             FontSize="18"
             Text="&#x261F;"/>
 
 
-				<Path x:Name="Switch1"
+					<Path x:Name="Switch1"
         Fill="Red" Stroke="Black" 
         StrokeThickness="1"
         Margin="0">
-					<Path.Data>
-						<!-- Create a composite shape. -->
-						<GeometryGroup>
-							<RectangleGeometry Rect="0,10,35,5" />
-							<RectangleGeometry Rect="15,0,5,10" />
-						</GeometryGroup>
-					</Path.Data>
-				</Path>
+						<Path.Data>
+							<!-- Create a composite shape. -->
+							<GeometryGroup>
+								<RectangleGeometry Rect="0,10,35,5" />
+								<RectangleGeometry Rect="15,0,5,10" />
+							</GeometryGroup>
+						</Path.Data>
+					</Path>
 
-			</StackPanel>
-		</Button>
+				</StackPanel>
+			</Button>
 
 
 
-		<Rectangle x:Name="Conductor_L1"
-        Grid.Column="1"  Grid.Row="1"
+			<Rectangle x:Name="Conductor_L1"
         HorizontalAlignment="Left" VerticalAlignment="Top"
          Margin="5,20,0,0" 
          Fill="Black" Stroke="Black"  
          Height="150" Width="5" />
 
-		<!--		<Rectangle x:Name="Conductor_L2"
+			<!--		<Rectangle x:Name="Conductor_L2"
         Grid.Column="1"  Grid.Row="1"
         HorizontalAlignment="Left" VerticalAlignment="Top"
          Margin="200,20,0,0" 
@@ -138,33 +179,29 @@
 
 
 
-		<Path 
+			<Path 
         x:Name="Neutral_N"
-        Grid.Column="1"  Grid.Row="1"
         Fill="Ivory" Stroke="Black" 
         StrokeThickness="1">
-			<Path.Data>
-				<RectangleGeometry Rect="220,20,5,150" />
-			</Path.Data>
-		</Path>
+				<Path.Data>
+					<RectangleGeometry Rect="220,20,5,150" />
+				</Path.Data>
+			</Path>
 
 
-		<Rectangle x:Name="Conductor_L1A"
-        Grid.Column="1"  Grid.Row="1"
+			<Rectangle x:Name="Conductor_L1A"
         HorizontalAlignment="Left" VerticalAlignment="Top"
          Margin="10,60,0,0" 
          Fill="Black" Stroke="Black"  
          Height="5" Width="25" />
 
-		<Rectangle x:Name="SwitchLeg_L1A"
-        Grid.Column="1"  Grid.Row="1"
+			<Rectangle x:Name="SwitchLeg_L1A"
         HorizontalAlignment="Left" VerticalAlignment="Top"
          Margin="70,60,0,0" 
          Fill="DarkRed" Stroke="Black"  
          Height="5" Width="68" />
 
-		<Rectangle x:Name="Neutral_N1"
-        Grid.Column="1"  Grid.Row="1"
+			<Rectangle x:Name="Neutral_N1"
         HorizontalAlignment="Left" VerticalAlignment="Top"
          Margin="178,60,0,0" 
          Fill="Ivory" Stroke="Black"  
@@ -172,38 +209,35 @@
 
 
 
-		<Path 
+			<Path 
         x:Name="SwitchLeg_L1A2"
-        Grid.Column="1"  Grid.Row="1"
         Fill="DarkRed" Stroke="Black" 
         StrokeThickness="1">
-			<Path.Data>
-				<RectangleGeometry Rect="90,65,5,50" />
-			</Path.Data>
-		</Path>
+				<Path.Data>
+					<RectangleGeometry Rect="90,65,5,50" />
+				</Path.Data>
+			</Path>
 
 
-		<Path 
+			<Path 
         x:Name="ConductorTap_2B"
-        Grid.Column="1"  Grid.Row="1"
         Fill="DarkRed" Stroke="Black" 
         StrokeThickness="1">
-			<Path.Data>
-				<RectangleGeometry Rect="95,110,43,5" />
-			</Path.Data>
-		</Path>
+				<Path.Data>
+					<RectangleGeometry Rect="95,110,43,5" />
+				</Path.Data>
+			</Path>
 
 
 
-		<Path 
+			<Path 
         x:Name="Neutral_N2"
-        Grid.Column="1"  Grid.Row="1"
         Fill="Ivory" Stroke="Black" 
         StrokeThickness="1">
-			<Path.Data>
-				<RectangleGeometry Rect="178,110,42,5" />
-			</Path.Data>
-		</Path>
+				<Path.Data>
+					<RectangleGeometry Rect="178,110,42,5" />
+				</Path.Data>
+			</Path>
 
 
 
@@ -211,8 +245,7 @@
 
 
 
-		<Ellipse x:Name="Switch1_Line"
-        Grid.Column="1" Grid.Row="1"
+			<Ellipse x:Name="Switch1_Line"
         HorizontalAlignment="Left" VerticalAlignment="Top"
         Height="9" Width="9"
         Margin="34,58,0,0"  
@@ -220,59 +253,49 @@
 
 
 
-		<Path x:Name="Switch1_Load"
-        Grid.Column="1"  Grid.Row="1"
+			<Path x:Name="Switch1_Load"
         Fill="LemonChiffon" Stroke="Black" 
         StrokeThickness="1">
-			<Path.Data>
-				<EllipseGeometry 
+				<Path.Data>
+					<EllipseGeometry 
                 Center="66,62" RadiusX="4.0" RadiusY="4.0" />
-			</Path.Data>
-		</Path>
+				</Path.Data>
+			</Path>
 
 
-		<Path x:Name="Switch1_NormallyOpen"
-        Grid.Column="2"  Grid.Row="1"
-        Fill="Red" Stroke="Black" 
-        StrokeThickness="1">
-			<Path.Data>
-				<!-- Create a composite shape. -->
-				<GeometryGroup>
-					<RectangleGeometry Rect="35,45,35,5" />
-					<RectangleGeometry Rect="50,35,5,10" />
-				</GeometryGroup>
-			</Path.Data>
-		</Path>
 
 
-		<Path x:Name="Motor"
-        Grid.Column="1"  Grid.Row="1"
+
+
+
+
+
+			<Path x:Name="motorPath"
         Fill="Green" Stroke="Black" 
         StrokeThickness="1">
-			<Path.Data>
-				<!-- Create a composite shape. -->
-				<GeometryGroup>
-					<EllipseGeometry Center="158,60" RadiusX="20" RadiusY="20" />
-					<EllipseGeometry Center="158,60" RadiusX="20" RadiusY="6" />
-					<EllipseGeometry Center="158,60" RadiusX="6" RadiusY="20" />
-				</GeometryGroup>
-			</Path.Data>
-		</Path>
+				<Path.Data>
+					<!-- Create a composite shape. -->
+					<GeometryGroup>
+						<EllipseGeometry Center="158,60" RadiusX="20" RadiusY="20" />
+						<EllipseGeometry Center="158,60" RadiusX="20" RadiusY="6" />
+						<EllipseGeometry Center="158,60" RadiusX="6" RadiusY="20" />
+					</GeometryGroup>
+				</Path.Data>
+			</Path>
 
 
-		<Path x:Name="Light"
-        Grid.Column="1"  Grid.Row="1"
+			<Path x:Name="Light"
         Fill="DarkGoldenrod" Stroke="Black" 
         StrokeThickness="1">
-			<Path.Data>
-				<!-- Create a composite shape. -->
-				<GeometryGroup>
-					<EllipseGeometry Center="158,112" RadiusX="20" RadiusY="20" />
-					<EllipseGeometry Center="158,112" RadiusX="18" RadiusY="18" />
-					<EllipseGeometry Center="158,112" RadiusX="16" RadiusY="16" />
-				</GeometryGroup>
-			</Path.Data>
-		</Path>
+				<Path.Data>
+					<!-- Create a composite shape. -->
+					<GeometryGroup>
+						<EllipseGeometry Center="158,112" RadiusX="20" RadiusY="20" />
+						<EllipseGeometry Center="158,112" RadiusX="18" RadiusY="18" />
+						<EllipseGeometry Center="158,112" RadiusX="16" RadiusY="16" />
+					</GeometryGroup>
+				</Path.Data>
+			</Path>
 
 
 
@@ -282,18 +305,17 @@
 
 
 
-		<TextBlock 
-        Grid.Column="1" Grid.Row="1" 
-        HorizontalAlignment="Left"  VerticalAlignment="Top"
-        Margin="65,5,0,0" 
-        Width="143"
+			<TextBlock 
+        HorizontalAlignment="Right"  VerticalAlignment="Top"
+        Margin="80,5,0,0" 
+        Width="100"
         Background="LightYellow"
-        FontSize="9" FontWeight="Bold"
+        FontSize="8" FontWeight="Bold"
         TextWrapping="Wrap" 
         Text="&#x22D8; Press finger, to operate the SPST toggle switch."/>
 
 
-
+		</Canvas>
 
 
 
@@ -301,138 +323,238 @@
              ******    Column 2   Row 1     *****     ******    Column 2   Row 1     *****     ******    Column 2   Row 1     *****     ******    Column 2   Row 1     *****     ******    Column 2   Row 1     *****     
         -->
 
+		<Grid
+        
+        Grid.Column="2"  Grid.Row="1">
 
-
-		<Label 
-        Grid.Column="2" Grid.Row="1" 
+			<Label 
         Margin="5,0,0,0" Padding="2,1"
         Background="LightYellow"
         FontSize="7" FontWeight="Bold"
         HorizontalAlignment="Left" VerticalAlignment="Top" 
         Content="&#x22D8; Press finger to operate the button."  >
-        <!--    TRIGGERS are XAML only, EVENT HANDLERS      -->
-			<Label.Triggers>
-                <EventTrigger RoutedEvent = "Label.Loaded">
+				<!--    TRIGGERS are XAML only, EVENT HANDLERS      -->
+				<Label.Triggers>
+					<EventTrigger RoutedEvent = "Label.Loaded">
 
-					<EventTrigger.Actions>
-						<BeginStoryboard>
-                        <!--    Storyboards:    MAP the Animation Object to the Target Property;
+						<EventTrigger.Actions>
+							<BeginStoryboard>
+								<!--    Storyboards:    MAP the Animation Object to the Target Property;
                                                 are ALWAYS wrapped by BeginStoryBoard parents. -->
-							<Storyboard TargetProperty ="FontSize">
-                            <!--    Animation Elements are placed inside StoryBoard -->
-								<DoubleAnimation From="7" To="50"
+								<Storyboard TargetProperty ="FontSize">
+									<!--    Animation Elements are placed inside StoryBoard -->
+									<DoubleAnimation From="7" To="50"
                                 Duration="0:0:4"
                                  RepeatBehavior="Forever"/>
-							</Storyboard>
-                        </BeginStoryboard>
-                  </EventTrigger.Actions>
-				</EventTrigger>
-			</Label.Triggers>
-        </Label>
+								</Storyboard>
+							</BeginStoryboard>
+						</EventTrigger.Actions>
+					</EventTrigger>
+				</Label.Triggers>
+			</Label>
 
 
-		<Button x:Name="textButton"
-        Grid.Column="2" Grid.Row="1"
+			<Button x:Name="textButton"
         HorizontalAlignment="Right" VerticalAlignment="Bottom"
         Margin="0"
         Height="40" Width="100"
         FontSize="16pt" FontFamily="Verdana" >
-			<Button.Triggers>
-				<EventTrigger RoutedEvent="Button.Loaded">
-					<BeginStoryboard>
-						<Storyboard>
-							<StringAnimationUsingKeyFrames RepeatBehavior="Forever"
+				<Button.Triggers>
+					<EventTrigger RoutedEvent="Button.Loaded">
+						<BeginStoryboard>
+							<Storyboard>
+								<StringAnimationUsingKeyFrames RepeatBehavior="Forever"
                             Storyboard.TargetProperty="Content"
                             Duration="0:0:3">
-								<DiscreteStringKeyFrame Value="/****\" KeyTime="0:0:0" />
-								<DiscreteStringKeyFrame Value="-****-" KeyTime="0:0:0.5" />
-								<DiscreteStringKeyFrame Value="\O***/" KeyTime="0:0:1.0" />
-								<DiscreteStringKeyFrame Value="|OK**|" KeyTime="0:0:1.5" />
-								<DiscreteStringKeyFrame Value="/OKA*\" KeyTime="0:0:2.0" />
-								<DiscreteStringKeyFrame Value="-OKAY-" KeyTime="0:0:2.5" />
+									<DiscreteStringKeyFrame Value="/****\" KeyTime="0:0:0" />
+									<DiscreteStringKeyFrame Value="-****-" KeyTime="0:0:0.5" />
+									<DiscreteStringKeyFrame Value="\O***/" KeyTime="0:0:1.0" />
+									<DiscreteStringKeyFrame Value="|OK**|" KeyTime="0:0:1.5" />
+									<DiscreteStringKeyFrame Value="/OKA*\" KeyTime="0:0:2.0" />
+									<DiscreteStringKeyFrame Value="-OKAY-" KeyTime="0:0:2.5" />
 
-							</StringAnimationUsingKeyFrames>
-                        
-                        </Storyboard>
-                    
-                    </BeginStoryboard>
-                
-                </EventTrigger>
-            
-            </Button.Triggers>
-        
-        </Button>
-		
-        
-        
-        
-        
-        <Image
-            Grid.Column="2" Grid.Row="1"
+								</StringAnimationUsingKeyFrames>
+
+							</Storyboard>
+
+						</BeginStoryboard>
+
+					</EventTrigger>
+
+				</Button.Triggers>
+				Hello
+			</Button>
+
+
+			<Border 
+			Height="50" Width="100" 
+			BorderBrush="Gray" BorderThickness="1"
+			VerticalAlignment="Bottom" HorizontalAlignment="Right"
+			Margin="0,0,0,45">
+				<StackPanel
+				Orientation="Vertical"
+				Background="Aquamarine">
+					<TextBlock
+					FontSize="9" TextWrapping="Wrap" >Using Case with Name to Handle 3 Buttons</TextBlock>
+					<StackPanel 
+				Background="LightBlue" Orientation="Horizontal" 
+				Button.Click="YesNoCancelButton_Click">
+						<Button Name="YesButton">Yes</Button>
+						<Button Name="NoButton">No</Button>
+						<Button Name="CancelButton">Cancel</Button>
+					</StackPanel>
+				</StackPanel>
+			</Border>
+
+
+			<Image x:Name="theImageObject"
             Stretch="None" 
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Margin="50,20,0,0">
-			<Image.Source>
-				<DrawingImage >
-					<!--
+				<Image.RenderTransform>
+					<TranslateTransform x:Name="MoveMeTransform" X="50"/>
+				</Image.RenderTransform>
+				<Image.Triggers>
+					<EventTrigger RoutedEvent="Image.Loaded">
+						<BeginStoryboard>
+							<Storyboard
+							RepeatBehavior="Forever">
+								<DoubleAnimationUsingKeyFrames
+								Storyboard.TargetName="MoveMeTransform"
+								Storyboard.TargetProperty="X">
+									<SplineDoubleKeyFrame KeyTime="0:0:1.25" Value="0" />
+								</DoubleAnimationUsingKeyFrames>
+
+								<DoubleAnimationUsingKeyFrames 
+								Storyboard.TargetName="theImageObject"
+								Storyboard.TargetProperty="Opacity">
+									<SplineDoubleKeyFrame 
+									KeyTime="0:0:3.0"
+									Value="0.2"/>
+								</DoubleAnimationUsingKeyFrames>
+							</Storyboard>
+						</BeginStoryboard>
+					</EventTrigger>
+				</Image.Triggers>
+				<Image.Source>
+					<DrawingImage >
+						<!--
 		<DrawingImage PresentationOptions:Freeze="True">
 		-->
-					<DrawingImage.Drawing>
+						<DrawingImage.Drawing>
 
-						<GeometryDrawing>
-							<GeometryDrawing.Geometry>
+							<GeometryDrawing>
+								<GeometryDrawing.Geometry>
 
-								<!-- Create a composite shape. -->
-								<GeometryGroup>
-									<RectangleGeometry Rect="0,10,50,5" />
-									<RectangleGeometry Rect="23,0,5,10" />
-								</GeometryGroup>
-							</GeometryDrawing.Geometry>
-							<GeometryDrawing.Brush>
+									<!-- Create a composite shape. -->
+									<GeometryGroup>
+										<RectangleGeometry Rect="0,10,50,5" />
+										<RectangleGeometry Rect="23,0,5,10" />
+									</GeometryGroup>
+								</GeometryDrawing.Geometry>
+								<GeometryDrawing.Brush>
 
-								<!-- Paint the drawing with a gradient. -->
-								<LinearGradientBrush>
-									<GradientStop Offset="0.0" Color="#0000FF" />
-									<GradientStop Offset="0.25" Color="#0000FF" />
-									<GradientStop Offset="0.35" Color="#006666" />
-									<GradientStop Offset="0.65" Color="#006666" />
-									<GradientStop Offset="0.75" Color="#0000FF" />
-									<GradientStop Offset="1.0" Color="#0000FF" />
-								</LinearGradientBrush>
-							</GeometryDrawing.Brush>
-							<GeometryDrawing.Pen>
+									<!-- Paint the drawing with a gradient. -->
+									<LinearGradientBrush>
+										<GradientStop Offset="0.0" Color="#0000FF" />
+										<GradientStop Offset="0.25" Color="#0000FF" />
+										<GradientStop Offset="0.35" Color="#006666" />
+										<GradientStop Offset="0.65" Color="#006666" />
+										<GradientStop Offset="0.75" Color="#0000FF" />
+										<GradientStop Offset="1.0" Color="#0000FF" />
+									</LinearGradientBrush>
+								</GeometryDrawing.Brush>
+								<GeometryDrawing.Pen>
 
-								<!-- Outline the drawing with a solid color. -->
-								<Pen Thickness="1" Brush="DarkBlue" />
-							</GeometryDrawing.Pen>
-						</GeometryDrawing>
-					</DrawingImage.Drawing>
-				</DrawingImage>
-			</Image.Source>
-		</Image>
-
-
+									<!-- Outline the drawing with a solid color. -->
+									<Pen Thickness="1" Brush="DarkBlue" />
+								</GeometryDrawing.Pen>
+							</GeometryDrawing>
+						</DrawingImage.Drawing>
+					</DrawingImage>
+				</Image.Source>
+			</Image>
 
 
 
 
 
 
-		<Button x:Name="fingerButton"
-        Grid.Column="2"  Grid.Row="1" 
+
+
+			<Button x:Name="fingerButton"
         HorizontalAlignment="Left" VerticalAlignment="Top"  
         Margin="80,80,0,0" Padding="0"
         Width="21" Height="25" 
         MouseEnter="btnSpinner_MouseEnter"
         Click="fingerButton_OnClick">
 
-			<TextBlock TextWrapping="Wrap"
+				<TextBlock TextWrapping="Wrap"
             Margin="0" Padding="0"
             FontSize="18"
             Text="&#x261F;"/>
-		</Button>
+			</Button>
 
 
+			<Button
+			
+			Height="30" Width="30"
+			HorizontalAlignment="Left" VerticalAlignment="Top"
+			Margin="5,20,0,0">
+				<Button.Triggers>
+					<EventTrigger RoutedEvent="Button.Loaded">
+					<!--<EventTrigger RoutedEvent="MouseEnter">-->
+						<BeginStoryboard>
+							<Storyboard>
+								<ThicknessAnimationUsingKeyFrames RepeatBehavior="Forever"
+                            Storyboard.TargetProperty="Margin"
+                            BeginTime="0:0:0">
+									<SplineThicknessKeyFrame 
+									Value="5,20,0,0" KeyTime="0:0:0" />
+
+									<SplineThicknessKeyFrame 
+									KeyTime="0:0:1"
+									Value="50,20,0,0" />
+
+									<SplineThicknessKeyFrame 
+									KeyTime="0:0:2"
+									Value="100,100,0,0"  />
+
+									<SplineThicknessKeyFrame 
+									KeyTime="0:0:3"
+									Value="5,20,0,0"  />
+
+								</ThicknessAnimationUsingKeyFrames>
+
+							</Storyboard>
+
+						</BeginStoryboard>
+
+					</EventTrigger>
+
+				</Button.Triggers>
+				<Grid>
+					<Path x:Name="Switch1_NormallyOpen"
+        Fill="Red" Stroke="Black" 
+        StrokeThickness="1">
+
+
+
+
+						<Path.Data>
+							<!-- Create a composite shape. -->
+							<GeometryGroup>
+								<RectangleGeometry Rect= "0,10,25,5" />
+								<RectangleGeometry Rect="10,0,5,10" />
+							</GeometryGroup>
+						</Path.Data>
+					</Path>
+				</Grid>
+			</Button>
+
+
+
+		</Grid>
 
 
 	</Grid>
