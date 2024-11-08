@@ -44,6 +44,26 @@
     
     -->
 
+	<Window.Resources>
+		<Style x:Key="PropertyTriggerExampleButtonStyle"
+		TargetType="{x:Type Button}">
+			<Setter Property="Opacity" Value="0.25" />
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Trigger.EnterActions>
+						<BeginStoryboard>
+							
+						</BeginStoryboard>
+					</Trigger.EnterActions>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	
+	
+	
+	</Window.Resources>
+
+
 	<Grid x:Name="MainGrid1"
         ShowGridLines="True">
 		<Grid.RowDefinitions>
@@ -67,13 +87,16 @@
                    Grid.Column="1" Grid.ColumnSpan="1"
                    />
             -->
+		
+		
 		<Rectangle x:Name="rectTopBanner" 
 		Grid.Column="1" 
       Fill="{Binding _bannerBrush1}" Stroke="Black"
       Height="34" Width="430" 
        />
 
-
+		<!--***********************************************************************************************************************************
+		*******      ROW 1     COL 1      *******      ROW 1     COL 1      *******      ROW 1     COL 1      *******      ROW 1     COL 1      -->
 
 		<Canvas
 		Background="DarkGray"
@@ -312,7 +335,7 @@
         Background="LightYellow"
         FontSize="8" FontWeight="Bold"
         TextWrapping="Wrap" 
-        Text="&#x22D8; Press finger, to operate the SPST toggle switch."/>
+        Text="&#x22D8; Press finger, to operate the SPST NO momentary switch."/>
 
 
 		</Canvas>
