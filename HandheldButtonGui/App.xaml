@@ -5,6 +5,14 @@
              StartupUri="MainWindow.xaml">
 	<!--  mc:Ignorable="PresentationOptions"  
 			is not available.-->
+
+			<!--  
+				FROM:  WPF-Samples  Animation 
+
+				Had to:
+					add sample_images folder & images;
+					cut PresentationOptions references.
+			-->
     <Application.Resources>
 
 		<!-- Brushes -->
@@ -12,7 +20,6 @@
 		<DrawingBrush x:Key="MyGridBrushResource"
         Viewport="0,0,10,10" ViewportUnits="Absolute"
         TileMode="Tile"
-
 		>
 			<!-- Property not found yet:
             presentationOptons:Freeze="True">
@@ -56,9 +63,9 @@
 		</DrawingBrush>
 
 
-		<!--  Other Resources 
-				M is start, L starts a line, Z is close  -->
-		
+		<!--  Other Resources -->
+
+		<!--		M is start, L starts a line, Z is close  -->
 		<PathGeometry x:Key="LeftArrowGeometry"
 			Figures="M10,25 L30,40  20,25 30,10Z"/>
 		<!-- Property not found yet:
@@ -366,5 +373,10 @@
 			</ModelVisual3D.Children>
 		</ModelVisual3D>
 
+
+
+		<SolidColorBrush x:Name="MySolidColorBrush1" 
+		x:Key="mySolidcolorBrush1"
+		Color="Blue" />
 	</Application.Resources>
 </Application>

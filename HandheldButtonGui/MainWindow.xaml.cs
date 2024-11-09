@@ -196,6 +196,15 @@ namespace HandheldButtonGui
         }
 
 
+
+
+
+
+
+
+
+
+
         //public class ColorToBrushConverter1 : IValueConverter
         //{
         //    public object Convert ( object value, Type targetType, object parameter, CultureInfo culture )
@@ -364,6 +373,59 @@ Actually, ya you can do what you want to do, exactly as you want to do using Ren
             throw new NotImplementedException ();
         }
 
+
+
+        /// <summary>
+        /// TODO:  Just pasted here
+        ///        
+        /// OF NOTE:    Storyboard children add
+        ///             Dependency property registration [?for a new page?]
+        /// </summary>
+        private void AddRectangle01 ()
+        {
+            //  Create a namescope for the page?
+            NameScope.SetNameScope ( this, new NameScope () );
+
+            var rectangle01 = new Rectangle ()
+            {
+                Name = "Rectangle01",
+                Width = 40,
+                Height = 40,
+
+            };
+            this.RegisterName ( rectangle01.Name, rectangle01 );
+            rectangle01.Fill = (SolidColorBrush)this.Resources ["MySolidColorBrushResource"];
+
+
+            ColorAnimation myColorAnimation = new ColorAnimation ();
+            myColorAnimation.From = Colors.Blue;
+            myColorAnimation.To = Colors.AliceBlue;
+            myColorAnimation.Duration = new Duration ( TimeSpan.FromSeconds ( 1 ) );
+            Storyboard.SetTargetName ( myColorAnimation, rectangle01.Name );
+
+            DependencyProperty [] propertyChain =
+                new DependencyProperty []
+                    {Rectangle.FillProperty, SolidColorBrush.ColorProperty};
+            string thePath = "(0).(1)";
+            PropertyPath myPropertyPath = new PropertyPath ( thePath, propertyChain );
+            Storyboard.SetTargetProperty ( myColorAnimation, myPropertyPath );
+
+            Storyboard myStoryboard = new Storyboard ();
+            myStoryboard.Children.Add ( myColorAnimation );
+            BeginStoryboard myBeginStoryboard = new BeginStoryboard ();
+            myBeginStoryboard.Storyboard = myStoryboard;
+            EventTrigger myMouseEnterTrigger = new EventTrigger ();
+            myMouseEnterTrigger.RoutedEvent = Rectangle.MouseEnterEvent;
+            myMouseEnterTrigger.Actions.Add ( myBeginStoryboard );
+            rectangle01.Triggers.Add ( myMouseEnterTrigger );
+
+
+            /*  Do I want this or just add to MainGrid cell c2 r1 => GridContainerC2R1
+            // Create a name scope for the page.
+            NameScope.SetNameScope ( this, new NameScope () );
+            this.RegisterName ( myRectangle.Name, myRectangle );
+            */
+        }
 
 
         #endregion  Methods
