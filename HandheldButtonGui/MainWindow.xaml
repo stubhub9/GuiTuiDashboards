@@ -45,6 +45,9 @@
     -->
 
 	<Window.Resources>
+		
+
+
 		<Style x:Key="PropertyTriggerExampleButtonStyle"
 		TargetType="{x:Type Button}">
 			<Setter Property="Opacity" Value="0.25" />
@@ -111,7 +114,7 @@
 		<!--***********************************************************************************************************************************
 		*******      ROW 1     COL 1      *******      ROW 1     COL 1      *******      ROW 1     COL 1      *******      ROW 1     COL 1      -->
 
-		<Canvas
+		<Canvas x:Name="cellPanel"
 		Background="DarkGray"
         Grid.Column="1" Grid.Row="1"
 		>
@@ -121,11 +124,53 @@
 					<EventTrigger.Actions>
 						<BeginStoryboard>
 							<Storyboard>
+
+							<!--  Light up the lamp.  -->
+								<ColorAnimation 
+            Storyboard.TargetName="Light"
+            Storyboard.TargetProperty="Fill.Color"
+            From="DarkGoldenrod" To="Yellow" Duration="0:0:1"
+			AutoReverse="True" RepeatBehavior="Forever"/>
+
+
+								<!--<Storyboard TargetProperty ="(Canvas.Top)">-->
+									<!--    Animation Elements are placed inside StoryBoard -->
+								<DoubleAnimation 
+									Storyboard.TargetName="spstButton"
+									Storyboard.TargetProperty="(Canvas.Top)"
+									From="10" To="18" Duration="0:0:1"
+									RepeatBehavior="Forever"/>
+
+
+
+								<!--  Motor  Rotation   -->
 								<DoubleAnimation
+Storyboard.TargetName="MyAnimatedTransform1"
+Storyboard.TargetProperty="(RotateTransform.Angle)"
+From="0.0" To="360" Duration="0:0:1" 
+AutoReverse="False"
+RepeatBehavior="Forever"/>
+
+
+
+
+								<!--<DoubleAnimation
 								Storyboard.TargetName="motorPath"
 								Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)"
+								From="0" To="360"
 								Duration="0:0:10">
-								</DoubleAnimation>
+								</DoubleAnimation>-->
+
+
+								<!--<DoubleAnimation 
+            Storyboard.TargetName="motorPath"
+            Storyboard.TargetProperty="RenderTransform.Children[1].Angle"
+            From="0" To="360" Duration="0:0:2" 
+			AutoReverse="True" RepeatBehavior="Forever"/>-->
+
+								<!--Error:  Storyboard.TargetName="motorPath"  -->
+
+
 							</Storyboard>
 						</BeginStoryboard>
 					</EventTrigger.Actions>
@@ -153,19 +198,19 @@
 				<Button.Triggers>
 					<EventTrigger RoutedEvent="Button.Loaded">
 					<!--<EventTrigger RoutedEvent="MouseEnter">-->
-
 						<EventTrigger.Actions>
-							<BeginStoryboard>
+
+							<!--<BeginStoryboard>-->
 								<!--    Storyboards:    MAP the Animation Object to the Target Property;
                                                 are ALWAYS wrapped by BeginStoryBoard parents. -->
 								<!--	HAVE TO WRAP Attached Properties in Parenthesis -->
-								<Storyboard TargetProperty ="(Canvas.Top)">
+								<!--<Storyboard TargetProperty ="(Canvas.Top)">-->
 									<!--    Animation Elements are placed inside StoryBoard -->
-									<DoubleAnimation From="10" To="18"
+									<!--<DoubleAnimation From="10" To="18"
                                 Duration="0:0:1"
                                  RepeatBehavior="Forever"/>
-								</Storyboard>
-							</BeginStoryboard>
+								</Storyboard>-->
+							<!--</BeginStoryboard>-->
 						</EventTrigger.Actions>
 
 					</EventTrigger>
@@ -300,17 +345,62 @@
 
 
 
+			
+			<!--Background="Transparent"-->
+			<Button x:Name="motorMount"
+				Height="50" Width="50"
+				Margin="133,36" 
+				RenderTransformOrigin="0.5, 0.5"
+				Background="Transparent">
+
+				<Button.RenderTransform>
+					<RotateTransform x:Name="MyAnimatedTransform1" Angle="0" />
+				</Button.RenderTransform>
+
+				<Path x:Name="motorPath1"
+        Fill="Green" Stroke="Black" 
+        StrokeThickness="1">
+					<Path.Data>
+						<!-- Create a composite shape. -->
+						<GeometryGroup>
+							<EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
+							<EllipseGeometry Center="20,20" RadiusX="20" RadiusY="6" />
+							<EllipseGeometry Center="20,20" RadiusX="6" RadiusY="20" />
+						</GeometryGroup>
+					</Path.Data>
+				</Path>
+			</Button>
 
 
+			<!--<Button 
+	RenderTransformOrigin="0.5, 0.5"
+	HorizontalAlignment="Left">
+				HELLO
+				<Button.RenderTransform>
+					<RotateTransform x:Name="MyAnimatedTransform" Angle="0" />
+				</Button.RenderTransform>
 
-
-
+				<Button.Triggers>
+					<EventTrigger RoutedEvent="Button.Loaded">
+						<BeginStoryboard>
+							<Storyboard>
+								<DoubleAnimation
+						Storyboard.TargetName="MyAnimatedTransform"
+						Storyboard.TargetProperty="(RotateTransform.Angle)"
+						From="0.0" To="360" Duration="0:0:1" 
+						AutoReverse="True"
+						RepeatBehavior="Forever"/>
+							</Storyboard>
+						</BeginStoryboard>
+					</EventTrigger>
+				</Button.Triggers>
+			</Button>-->
 
 			<Path x:Name="motorPath"
         Fill="Green" Stroke="Black" 
         StrokeThickness="1">
 				<Path.Data>
-					<!-- Create a composite shape. -->
+					 <!--Create a composite shape.--> 
 					<GeometryGroup>
 						<EllipseGeometry Center="158,60" RadiusX="20" RadiusY="20" />
 						<EllipseGeometry Center="158,60" RadiusX="20" RadiusY="6" />
@@ -521,13 +611,13 @@
 			<Button x:Name="fingerButton"
         HorizontalAlignment="Left" VerticalAlignment="Top"  
         Margin="80,80,0,0" Padding="0"
-        Width="21" Height="25" 
+        Width="30" Height="50" 
         MouseEnter="btnSpinner_MouseEnter"
         Click="fingerButton_OnClick">
 
 				<TextBlock TextWrapping="Wrap"
             Margin="0" Padding="0"
-            FontSize="18"
+            FontSize="38"
             Text="&#x261F;"/>
 			</Button>
 
@@ -636,7 +726,31 @@
 
 
 
+			<Button 
+				Height="50"
+				Background="BlueViolet"
+				RenderTransformOrigin="0.5, 0.5"
+				HorizontalAlignment="Left">
+				HELLO
+				<Button.RenderTransform>
+					<RotateTransform x:Name="MyAnimatedTransform" Angle="0" />
+				</Button.RenderTransform>
 
+				<Button.Triggers>
+					<EventTrigger RoutedEvent="Button.Loaded">
+						<BeginStoryboard>
+							<Storyboard>
+								<DoubleAnimation
+									Storyboard.TargetName="MyAnimatedTransform"
+									Storyboard.TargetProperty="(RotateTransform.Angle)"
+									From="0.0" To="360" Duration="0:0:1" 
+									AutoReverse="True"
+									RepeatBehavior="Forever"/>
+							</Storyboard>
+						</BeginStoryboard>
+					</EventTrigger>
+				</Button.Triggers>
+			</Button>
 		</Grid>
 
 

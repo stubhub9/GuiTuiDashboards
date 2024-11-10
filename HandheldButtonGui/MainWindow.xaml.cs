@@ -81,16 +81,19 @@ namespace HandheldButtonGui
 
         }
 
+
+        //IN USE:  Spins the fingerButton at C2R2
         private void btnMotorSpinner ( object sender, MouseEventArgs e )
         {
             var dblAnim = new DoubleAnimation ()
             {
-                //AccelerationRatio=0.1,
-                //DecelerationRatio=0.2,
+                AccelerationRatio = 0.2,
+                DecelerationRatio = 0.2,
                 //Duration=0:0:5,
                 From = 0,
                 To = 360,
                 Duration = new Duration ( TimeSpan.FromSeconds ( 1 ) ),
+                AutoReverse = true,
                 RepeatBehavior = RepeatBehavior.Forever,
             };
 
